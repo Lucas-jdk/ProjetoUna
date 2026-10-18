@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: mestres-do-conhecimento
+    runtime: docker
+    plan: free
+    healthCheckPath: /

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mestres do Conhecimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="game">
+  <div class="header">
+    <div class="player-info">
+      <div class="name-tag"><span id="player-name">LÚCIA, FILHA DO NORTE</span><span class="badge" id="player-level">NV. 1</span></div>
+      <div class="stat-bar"><span>HP</span><div class="bar" role="progressbar" aria-label="Vida"><div id="hp-fill" style="width:100%"></div></div><span id="hp-text">100 / 100</span></div>
+      <div class="stat-bar"><span>EXP</span><div class="bar" role="progressbar" aria-label="Experiência"><div id="exp-fill" style="width:0%"></div></div><span id="exp-text">0 / 300</span></div>
+    </div>
+    <div class="game-title">
+      <h1>MESTRES DO CONHECIMENTO</h1>
+      <p id="current-stage">Carregando fase...</p>
+      <div class="stage-dots" id="stage-dots"></div>
+    </div>
+    <div class="score-box"><span id="multiplier">🟡 1.0x</span><small>Pontos: <b id="score">0</b></small></div>
+  </div>
+
+  <div class="arena" id="arena-bg">
+    <div class="scene" id="scene"></div>
+    <div class="character-box hero-box">
+      <div class="char" id="hero-img" role="img" aria-label="Guerreira nórdica" title="Clique!"></div>
+      <div class="class-tag" id="class-tag">Guerreira do Norte</div>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="character-box monster-box">
+      <div class="char" id="monster-img" role="img" aria-label="Chefe" title="Clique!"></div>
+      <div class="monster-tag" id="monster-tag">CHEFE</div>
+      <div class="boss-hp bar"><div id="boss-fill" style="width:100%"></div></div>
+    </div>
+  </div>
+
+  <div class="quiz-box">
+    <div class="monster-header"><h3 id="monster-name">GUARDIÃO</h3><p>Derrote o chefe acertando as perguntas.</p></div>
+    <div class="tags"><span class="tag-question" id="subject-tag">Matéria</span><span class="tag-dif" id="diff-tag">Fácil</span><span class="tag-exp" id="exp-reward">+0 EXP</span></div>
+    <h2 id="question-text">Carregando pergunta...</h2>
+    <div class="options-grid" id="options-container"></div>
+    <div id="feedback" aria-live="polite">Escolha uma resposta antes que o tempo acabe.</div>
+    <div class="footer-controls">
+      <div class="timer" id="timer">⏱️ 00:30</div>
+      <div class="helpers">
+        <button id="b-dica" onclick="useHelper('dica')">💡 Dica ×2</button>
+        <button id="b-pular" onclick="useHelper('pular')">🦘 Pular ×1</button>
+        <button id="b-fifty" onclick="useHelper('fifty')">📊 50/50 ×1</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="side">
+    <section><h3>Estatísticas</h3>
+      <div class="stats">
+        <div><b id="s-hit">0</b><small>Acertos</small></div><div><b id="s-miss">0</b><small>Erros</small></div>
+        <div><b id="s-acc">0%</b><small>Precisão</small></div><div><b id="s-time">0s</b><small>Tempo médio</small></div>
+        <div><b id="s-streak">0</b><small>Sequência</small></div><div><b id="s-best">0</b><small>Melhor seq.</small></div>
+      </div></section>
+    <section><h3>Por matéria</h3><div id="subjects"></div></section>
+    <section><h3>Diário de batalha</h3><ul id="log"><li>A aventura começou.</li></ul></section>
+  </aside>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal"><h2 id="m-title"></h2><p id="m-text"></p><button onclick="startGame()">Jogar de novo</button></div></div>
+
+<script src="app.js"></script>
+</body>
+</html>

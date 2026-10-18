@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#17201d">
+    <title>Mestres do Conhecimento</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#inicio">
+          <span class="brand-mark">✦</span>
+          <span>MESTRES <i>DO CONHECIMENTO</i>
+          </span>
+        </a>
+        <div class="top-actions">
+          <span class="online">
+            <b></b> AVENTURA EDUCATIVA</span>
+          <button class="sound-button" id="home-button" aria-label="Voltar ao início">⌂</button>
+        </div>
+      </header>
+
+      <!-- Tela de entrada do jogo -->
+      <section id="home-screen" class="screen home-screen">
+        <div class="hero-copy">
+          <span class="eyebrow">APRENDER TAMBÉM É UMA AVENTURA</span>
+          <h1>Seu conhecimento<br>é sua <em>maior força.</em>
+          </h1>
+          <p>Escolha uma matéria, encontre seu mestre e vença desafios para avançar de fase.</p>
+          <button class="primary-button" id="begin-button">COMEÇAR A JORNADA <span>→</span>
+          </button>
+          <div class="home-note">
+            <span>✦</span> 5 mundos para explorar <span>·</span> perguntas rápidas e divertidas</div>
+        </div>
+        <div class="home-art" aria-hidden="true">
+          <div class="sun-orbit orbit-one"></div>
+          <div class="sun-orbit orbit-two"></div>
+          <div class="big-star">✦</div>
+          <div class="home-mascot">🧙‍♀️</div>
+          <div class="floating-card card-top">✦ <small>SEU PRÓXIMO DESAFIO</small>
+          </div>
+          <div class="floating-card card-bottom">+50 XP <small>RESPOSTA CERTA!</small>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Lobby para escolher uma matéria -->
+      <section id="select-screen" class="screen select-screen hidden">
+        <div class="section-heading">
+          <button class="text-back" data-screen="home">← Início</button>
+          <span class="eyebrow">ESCOLHA SEU CAMINHO</span>
+          <h1>Qual matéria vamos <em>desvendar?</em>
+          </h1>
+          <p>Conheça os heróis, escolha um mundo e prepare-se para enfrentar o chefe final.</p>
+          <div class="lobby-count">
+            <span>✦ 5 HERÓIS</span>
+            <span>⚔ 25 MONSTROS</span>
+            <span>👑 5 CHEFES FINAIS</span>
+          </div>
+        </div>
+        <div class="subject-grid" id="subject-grid">
+          <div class="loading">Carregando mundos...</div>
+        </div>
+      </section>
+
+
+      <!-- Arena, pergunta e indicadores da partida -->
+      <section id="game-screen" class="screen game-screen hidden">
+        <div class="game-toolbar">
+          <button class="text-back" id="change-subject">← Trocar matéria</button>
+          <div class="round-pill" id="round-pill">DESAFIO 1</div>
+          <button class="sound-button" id="restart-button" title="Recomeçar matéria">↻</button>
+        </div>
+        <div class="game-layout">
+          <section class="battle-card">
+            <div class="battle-meta">
+              <span id="game-subject" class="subject-label">MATÉRIA</span>
+              <span id="phase-label">FASE 1 / 5</span>
+            </div>
+            <div class="arena" id="arena">
+              <div class="scene-backdrop" id="scene-backdrop">
+                <span class="scene-label" id="scene-label"></span>
+                <div class="scene-illustration" id="scene-illustration"></div>
+                <div class="scene-items" id="scene-items"></div>
+              </div>
+              <div class="arena-glow"></div>
+              <div class="character hero-character">
+                <div id="hero-avatar" class="avatar hero-avatar" role="img" aria-label="Herói"></div>
+                <strong id="hero-name">MESTRE</strong>
+                <small id="hero-role">GUARDIÃO</small>
+                <div class="health-meta">
+                  <span>VIDA</span>
+                  <b id="hero-hp-value">100 / 100</b>
+                </div>
+                <div class="health">
+                  <i id="hero-health"></i>
+                </div>
+              </div>
+              <div class="versus">VS</div>
+              <div class="character boss-character">
+                <div id="boss-avatar" class="avatar boss-avatar" role="img" aria-label="Monstro"></div>
+                <strong id="boss-name">DESAFIO</strong>
+                <small id="boss-role">MONSTRO DA FASE</small>
+                <div class="health-meta">
+                  <span>VIDA</span>
+                  <b id="boss-hp-value">100 / 100</b>
+                </div>
+                <div class="health boss-health">
+                  <i id="boss-health"></i>
+                </div>
+              </div>
+            </div>
+            <div class="quiz-area">
+              <div class="quiz-title">
+                <div>
+                  <span class="eyebrow" id="question-kicker">PERGUNTA DO MESTRE</span>
+                  <h2 id="question-text">Carregando pergunta...</h2>
+                </div>
+                <span id="reward" class="reward">+50 XP</span>
+              </div>
+              <div id="options" class="options-grid"></div>
+              <div class="quiz-footer">
+                <p id="feedback" aria-live="polite">Escolha uma resposta para atacar.</p>
+                <div class="timer-wrap">
+                  <span>⏱</span>
+                  <b id="timer">30</b>
+                  <small>SEG</small>
+                </div>
+              </div>
+              <div class="helper-row">
+                <button id="hint-button">💡 Mostrar dica</button>
+                <button id="next-button" class="primary-button hidden">PRÓXIMA PERGUNTA →</button>
+                <button id="leave-button" class="subtle-button">Sair do desafio</button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="progress-card">
+            <span class="eyebrow">SUA JORNADA</span>
+            <h3 id="aside-subject">Escolha uma matéria</h3>
+            <div class="xp-row">
+              <span>Experiência</span>
+              <b>
+                <span id="xp">0</span> XP</b>
+            </div>
+            <div class="xp-track">
+              <i id="xp-fill"></i>
+            </div>
+            <div class="progress-line">
+              <span>Acertos</span>
+              <b id="correct-count">0</b>
+            </div>
+            <div class="progress-line">
+              <span>Desafios</span>
+              <b id="challenge-count">0 / 5</b>
+            </div>
+            <div class="streak-box">
+              <span>✦</span>
+              <div>
+                <b id="streak-count">0 em sequência</b>
+                <small>Continue assim!</small>
+              </div>
+            </div>
+            <div class="tip-box">
+              <b>✧ DICA DO MESTRE</b>
+              <p>Leia cada alternativa com calma. Você consegue!</p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Aproveitamento e revisão das respostas erradas -->
+        <section id="phase-results" class="phase-results hidden" aria-live="polite">
+          <div class="result-content">
+            <span id="result-mark" class="result-mark">✦</span>
+            <span id="result-eyebrow" class="eyebrow">FASE CONCLUÍDA</span>
+            <h2 id="result-title">Sua jornada continua</h2>
+            <p id="result-message" class="result-message"></p>
+            <div class="result-subject">
+              <span>APROVEITAMENTO EM</span>
+              <strong id="result-subject">Matéria</strong>
+            </div>
+            <div class="accuracy-card">
+              <div class="accuracy-heading">
+                <span>Respostas corretas</span>
+                <strong id="result-accuracy">0%</strong>
+              </div>
+              <div class="accuracy-track">
+                <i id="result-progress"></i>
+              </div>
+              <p>
+                <b id="result-correct">0 de 0</b> respostas corretas</p>
+            </div>
+            <div class="result-stats">
+              <div>
+                <span>✦</span>
+                <b id="result-xp">0 XP</b>
+                <small>experiência ganha</small>
+              </div>
+              <div>
+                <span>⚡</span>
+                <b id="result-streak">0</b>
+                <small>maior sequência correta</small>
+              </div>
+            </div>
+            <p id="result-boss" class="result-boss"></p>
+            <p id="all-correct-note" class="all-correct-note hidden">Você acertou todas as perguntas!</p>
+            <div id="wrong-answers" class="wrong-answers hidden">
+              <h3>Revise as respostas que você errou</h3>
+              <div id="wrong-answer-list"></div>
+            </div>
+            <div class="result-actions">
+              <button id="result-retry" class="primary-button">JOGAR DE NOVO <span>↻</span>
+              </button>
+              <button id="result-lobby" class="subtle-button">ESCOLHER OUTRA MATÉRIA →</button>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+
+      <!-- Rodapé do jogo -->
+      <footer>
+        <span>UMA AVENTURA PARA CURIOSOS</span>
+        <span>FEITO PARA APRENDER · <b>✦</b>
+        </span>
+      </footer>
+    </main>
+
+    <!-- Mensagens temporárias do jogo -->
+    <div id="toast" class="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
