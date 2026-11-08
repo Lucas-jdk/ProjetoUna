@@ -340,7 +340,7 @@ public class Server {
             "Português",
             "Complete com a forma verbal adequada: Ontem, eles ___ ao museu.",
             "A palavra ontem indica uma ação já concluída.",
-            2,
+            1,
             "vai",
             "foram",
             "irão",

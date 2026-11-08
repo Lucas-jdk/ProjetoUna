@@ -24,26 +24,40 @@
 
       <!-- Tela de entrada do jogo -->
       <section id="home-screen" class="screen home-screen">
-        <div class="hero-copy">
-          <span class="eyebrow">APRENDER TAMBÉM É UMA AVENTURA</span>
-          <h1>Seu conhecimento<br>é sua <em>maior força.</em>
-          </h1>
-          <p>Escolha uma matéria, encontre seu mestre e vença desafios para avançar de fase.</p>
-          <button class="primary-button" id="begin-button">COMEÇAR A JORNADA <span>→</span>
-          </button>
-          <div class="home-note">
-            <span>✦</span> 5 mundos para explorar <span>·</span> perguntas rápidas e divertidas</div>
+        <div class="home-landscape" aria-hidden="true">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="home-sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8ed8e7"/><stop offset=".58" stop-color="#f3d9a2"/><stop offset="1" stop-color="#e89d73"/></linearGradient>
+              <linearGradient id="home-water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#72c6c0"/><stop offset="1" stop-color="#377b80"/></linearGradient>
+              <linearGradient id="home-field" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8bc6a"/><stop offset="1" stop-color="#506d4b"/></linearGradient>
+              <radialGradient id="home-sun"><stop stop-color="#fff4c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff4c4" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#home-sky)"/>
+            <circle cx="1165" cy="225" r="250" fill="url(#home-sun)"/><circle cx="1165" cy="225" r="70" fill="#fff0bd" opacity=".9"/>
+            <g fill="#fff8e9" opacity=".62"><path d="M150 252q12-43 55-25 23-43 67-18 36-27 70 5 51-8 54 38H150z"/><path d="M770 174q18-33 51-16 20-42 58-18 31-25 61 5 39-6 43 29H770z"/><path d="M1320 367q15-34 46-16 21-39 54-16 31-24 57 4 41-7 45 28h-202z"/></g>
+            <path d="M0 530 186 385l148 103 183-226 186 228 191-179 171 181 197-237 338 279v216H0z" fill="#83ac9d" opacity=".66"/>
+            <path d="m190 390 144 98 183-226 104 127-64-24-44 43-43-38-54 31-82-30-54 69zM887 493l197-181 171 181-83-36-55 26-58-39-57 26-57-21z" fill="#e4f0d7" opacity=".76"/>
+            <path d="M0 579q226-111 431-15t397-5q197-108 392 7 199 111 380-5v339H0z" fill="#638d68"/>
+            <path d="M0 641q274-81 474 21t415-9q205-104 386 20 155 102 325 4v223H0z" fill="url(#home-water)"/>
+            <path d="M0 682q214-56 416 9t410 2q226-76 443 7 174 68 331 12" fill="none" stroke="#d2f0d6" stroke-opacity=".62" stroke-width="8"/>
+            <path d="M0 730q255-48 463 28t395 5q231-60 449 17 156 55 293 12v108H0z" fill="url(#home-field)"/>
+            <g fill="#345640"><path d="M58 734q-8-160 24-247 39 102 22 247zM25 565q-48-53-32-103 47 15 68 65zm72-62q12-58 64-73-1 62-48 91zM1515 745q-12-178 26-266 37 101 20 266zM1489 555q-50-52-31-104 47 16 67 68zm70-61q14-58 65-72-2 61-49 89z"/></g>
+            <g fill="#e9d58f" opacity=".82"><circle cx="270" cy="721" r="7"/><circle cx="312" cy="754" r="5"/><circle cx="1374" cy="713" r="7"/><circle cx="1318" cy="760" r="5"/><circle cx="1050" cy="797" r="6"/></g>
+          </svg>
         </div>
-        <div class="home-art" aria-hidden="true">
-          <div class="sun-orbit orbit-one"></div>
-          <div class="sun-orbit orbit-two"></div>
-          <div class="big-star">✦</div>
-          <div class="home-mascot">🧙‍♀️</div>
-          <div class="floating-card card-top">✦ <small>SEU PRÓXIMO DESAFIO</small>
-          </div>
-          <div class="floating-card card-bottom">+50 XP <small>RESPOSTA CERTA!</small>
-          </div>
+        <div class="home-copy">
+          <span class="eyebrow home-eyebrow"><i></i> UMA AVENTURA PARA APRENDER</span>
+          <h1>O saber abre<br><em>novos caminhos.</em></h1>
+          <p>Reúna os mestres, atravesse terras encantadas e enfrente desafios que transformam conhecimento em coragem.</p>
+          <button class="primary-button home-start" id="begin-button">COMEÇAR A JORNADA <span>→</span></button>
+          <div class="home-facts"><span>✦ 5 mundos ilustrados</span><span>⚔ 25 encontros</span><span>♛ 5 chefes lendários</span></div>
         </div>
+        <div class="home-party" aria-label="Os cinco mestres da jornada">
+          <div class="home-party-glow"></div>
+          <div id="home-characters" class="home-characters"></div>
+          <div class="home-party-caption"><span>OS MESTRES</span><b>Uma equipe. Cinco mundos.</b></div>
+        </div>
+        <div class="home-scroll-cue" aria-hidden="true"><span></span> A JORNADA COMEÇA AQUI</div>
       </section>
 
 
@@ -74,11 +88,35 @@
           <div class="round-pill" id="round-pill">DESAFIO 1</div>
           <button class="sound-button" id="restart-button" title="Recomeçar matéria">↻</button>
         </div>
+
+        <section id="journey-screen" class="journey-screen hidden" aria-live="polite">
+          <div class="journey-art" id="journey-art" aria-hidden="true"></div>
+          <div class="journey-copy">
+            <span class="eyebrow" id="journey-kicker">A JORNADA CONTINUA</span>
+            <h2 id="journey-title">A trilha se abre diante de você</h2>
+            <p id="journey-narrative"></p>
+            <div class="journey-destination"><span>PRÓXIMO ENCONTRO</span><b id="journey-destination-name"></b></div>
+            <div class="journey-choices">
+              <button id="journey-rest" class="journey-choice">
+                <span class="journey-choice-icon">✧</span><span><b>Acampar sob as lanternas</b><small>Recupere 20 pontos de vida antes de seguir.</small></span><i>→</i>
+              </button>
+              <button id="journey-study" class="journey-choice">
+                <span class="journey-choice-icon">⌘</span><span><b>Estudar os ecos do caminho</b><small>Ganhe 25 XP e siga com novas ideias.</small></span><i>→</i>
+              </button>
+            </div>
+          </div>
+          <div class="journey-route" id="journey-route" aria-label="Progresso da jornada"></div>
+        </section>
         <div class="game-layout">
           <section class="battle-card">
             <div class="battle-meta">
               <span id="game-subject" class="subject-label">MATÉRIA</span>
               <span id="phase-label">FASE 1 / 5</span>
+            </div>
+            <div class="challenge-banner">
+              <span class="challenge-glyph">✧</span>
+              <span><b id="challenge-name">Duelo de abertura</b><small id="challenge-rule">30 segundos para responder.</small></span>
+              <span class="challenge-tag">REGRA DO ENCONTRO</span>
             </div>
             <div class="arena" id="arena">
               <div class="scene-backdrop" id="scene-backdrop">
@@ -104,6 +142,7 @@
                 <div id="boss-avatar" class="avatar boss-avatar" role="img" aria-label="Monstro"></div>
                 <strong id="boss-name">DESAFIO</strong>
                 <small id="boss-role">MONSTRO DA FASE</small>
+                <span id="boss-ability" class="boss-ability hidden"></span>
                 <div class="health-meta">
                   <span>VIDA</span>
                   <b id="boss-hp-value">100 / 100</b>

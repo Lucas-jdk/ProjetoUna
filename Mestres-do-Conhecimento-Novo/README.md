@@ -18,7 +18,9 @@ Envie esta pasta para um repositório GitHub e crie no Render um serviço web us
 
 ## Como a fase funciona
 
-Cada mundo tem quatro monstros iniciais. Cada monstro exige três acertos em perguntas fáceis, e o chefe final exige cinco acertos em perguntas médias. As perguntas já exibidas ficam registradas durante a fase e a API tenta sempre enviar uma pergunta inédita. Cada matéria tem 16 perguntas fáceis e 9 médias na biblioteca da API Java. A fase registra todas as perguntas exibidas, inclusive as erradas, e a API só devolve IDs inéditos. Se o banco se esgotar, a fase é encerrada com um aviso, sem repetir questões. O herói também perde a fase se ficar sem vida. Respostas corretas valem 50 XP nas fases comuns e 75 XP contra o chefe.
+Cada mundo tem quatro monstros iniciais e um chefe. Cada monstro exige três acertos em perguntas fáceis; o chefe exige cinco acertos em perguntas médias. Entre os encontros, a equipe pode descansar para recuperar até 20 pontos de vida ou estudar para ganhar 25 XP. Os desafios comuns variam o tempo e podem oferecer XP extra ou recuperar vida. Cada chefe tem uma habilidade própria, apresentada antes da luta.
+
+Cada matéria tem 16 perguntas fáceis e 9 médias na biblioteca da API Java. As perguntas já exibidas ficam registradas durante a fase, inclusive as erradas, e a API tenta sempre enviar uma pergunta inédita. Se o banco se esgotar, a fase é encerrada com um aviso, sem repetir questões. O herói também perde a fase se ficar sem vida. As respostas certas valem 50 XP nas fases comuns e 75 XP contra o chefe, antes dos bônus de desafio e das escolhas de jornada.
 
 ## Onde alterar o jogo
 
@@ -27,7 +29,7 @@ Cada mundo tem quatro monstros iniciais. Cada monstro exige três acertos em per
 - Tela, textos e estrutura: frontend/index.html.
 - Cores, cartões, animações e adaptação a celular: frontend/style.css.
 
-Os heróis, monstros e ambientes usam SVG criado no próprio projeto, sem uma API de imagens ou chave externa.
+Os heróis, monstros e ambientes usam SVG original criado no próprio projeto, sem recortes de referências, API de imagens ou chave externa. Cada mundo tem cinco variações visuais de cenário que acompanham a equipe até a arena do chefe.
 
 ## Comentários no código
 
@@ -48,7 +50,7 @@ O arquivo HTML original está preservado em referencia/Index.html2.html. O jogo 
 - `backend/Server.java`: servidor Java, endpoints da API e banco de perguntas por matéria.
 - `frontend/index.html`: estrutura das telas inicial, seleção de matéria, batalha e resultados.
 - `frontend/style.css`: cores, layout, personagens, cenários, animações e adaptação para celular.
-- `frontend/app.js`: navegação e regras do jogo, personagens em SVG, combate, controle de perguntas usadas e relatório final.
+- `frontend/app.js`: navegação e regras do jogo, personagens e cenários em SVG, escolhas entre encontros, desafios variados, habilidades de chefes, controle de perguntas usadas e relatório final.
 - `referencia/Index.html2.html`: cópia do HTML fornecido como referência.
 - `Dockerfile`: compila e inicia o servidor Java em um contêiner.
 - `render.yaml`: configuração do serviço web no Render.
