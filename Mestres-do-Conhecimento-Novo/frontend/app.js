@@ -457,6 +457,7 @@ function figureSvg(person, isMonster = false) {
   const kind = /^[a-z]+$/i.test(person.kind || '') ? person.kind : 'golem';
   const id = 'figure-' + (++figureSequence);
   const boss = Boolean(isMonster && person.power);
+  const aura = isMonster ? '#d44751' : a;
   const name = String(person.name || '').toLocaleLowerCase('pt-BR');
   const mark = String(person.mark || '✦').replace(/[&<>"']/g, character => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
@@ -532,6 +533,28 @@ function figureSvg(person, isMonster = false) {
     treebeast: { back: '<path d="M81 127Q39 80 27 96q-2 22 47 42m72-11q42-40 54-24 2 22-47 42" fill="none" stroke="@S@" stroke-width="17" stroke-linecap="round"/><path d="M58 110l-5-29m112 29 5-29" stroke="@A@" stroke-width="5"/>', body: '<path d="M76 111q34-23 68 0l14 63q-24 22-48 17-24 5-48-17z" fill="@BODY@" stroke="#3a493f" stroke-width="5"/><path d="M110 117v62m-19-41 19 14 19-14m-46 23 15-9m39 9-15-9" fill="none" stroke="@A@" stroke-width="5"/><path d="M83 161l15-9m39 9-15-9" stroke="#664a3c" stroke-width="4"/>', head: '<path d="M84 87Q48 52 62 30q21-5 35 24 3-36 13-42 13 12 14 42 19-34 38-24 13 23-23 53l-2 24H86z" fill="@BODY@" stroke="#3a493f" stroke-width="5"/><path d="M71 45l25 25m42-1 25-25m-53-25v48" stroke="@A@" stroke-width="4"/>', face: '<circle cx="101" cy="109" r="6" fill="#ffe88a"/><circle cx="127" cy="109" r="6" fill="#ffe88a"/><path d="M92 102q9-8 18 0m9 0q9-8 18 0m-39 29 12 8 12-8" fill="none" stroke="#453f39" stroke-width="4"/>', front: '<circle cx="110" cy="158" r="7" fill="#fff0ad" stroke="#75523d" stroke-width="3"/>' }
   };
 
+  const monsterSilhouettes = {
+    ink: '<path d="M81 105L55 51l42 35 13-59 15 58 39-36-20 61 35-10-26 43-87 5-28-38 33 10z" fill="#17111f" stroke="#08080d" stroke-width="7"/>',
+    gargoyle: '<path d="M78 109L26 26l67 47 17-55 19 55 66-47-52 89-65 2z" fill="#111821" stroke="#080b10" stroke-width="7"/>',
+    ghost: '<path d="M77 116Q37 77 52 37q8 29 29 34Q67 35 99 13q-6 39 12 53 17-23 42-30-16 38-3 59l39-20-25 53-91 8z" fill="#191321" stroke="#09070e" stroke-width="7"/>',
+    raven: '<path d="M91 132Q39 37 12 39q8 65 72 111l26 12m18-30q52-95 80-93-8 65-72 111l-26 12" fill="#101019" stroke="#06060a" stroke-width="7"/>',
+    dragon: '<path d="M80 118L28 23l77 60 6-70 19 70 68-60-38 97-80 6z" fill="#1d1117" stroke="#0b080d" stroke-width="7"/>',
+    golem: '<path d="M75 128L28 75l47 13 16-66 25 48 23-48 14 65 42-18-34 69-84 13z" fill="#17191c" stroke="#090b0d" stroke-width="8"/>',
+    serpent: '<path d="M82 147Q32 116 57 71q11 23 31 26Q71 47 111 15q3 36 25 55 17-22 44-21-22 31-14 56l25-3-29 44-74 15z" fill="#101a17" stroke="#070b09" stroke-width="7"/>',
+    hydra: '<path d="M70 121Q37 67 58 18q25 14 29 66 5-73 29-79 21 17 10 80 15-68 46-69 16 38-18 91l-8 42-77 4z" fill="#191118" stroke="#08060a" stroke-width="7"/>',
+    kraken: '<path d="M78 129Q18 91 31 47q27 6 57 56Q46 34 68 10q28 20 42 77Q124 23 153 9q17 42-27 95 52-59 82-44 0 44-65 80z" fill="#10181b" stroke="#070b0d" stroke-width="7"/>',
+    storm: '<path d="M74 124Q22 91 48 49q13 23 39 29Q64 34 106 10q-4 43 21 65 17-32 52-34-22 43-7 66l28-8-29 48-87 9z" fill="#151624" stroke="#080911" stroke-width="7"/>',
+    slime: '<path d="M72 129Q37 88 55 42q20 20 31 34 1-47 25-63 15 30 10 65 22-27 47-27-12 42-2 74l-22 34-75 0z" fill="#151a12" stroke="#080b08" stroke-width="7"/>',
+    germ: '<path d="M77 119L48 53l47 39-4-70 29 63 43-48-20 70 48 5-48 32-68 3z" fill="#171a12" stroke="#090b07" stroke-width="7"/>',
+    automaton: '<path d="M74 118L48 42l52 52 10-80 22 77 48-50-22 82-42 28-57-4z" fill="#11171b" stroke="#070a0d" stroke-width="7"/>',
+    sphinx: '<path d="M76 115L33 42l62 39 15-65 17 65 62-39-42 75-69 4z" fill="#191411" stroke="#0a0807" stroke-width="7"/>',
+    mummy: '<path d="M76 119L42 39l57 51 13-75 21 72 53-48-29 82-68 8z" fill="#171411" stroke="#080706" stroke-width="7"/>',
+    warrior: '<path d="M76 121L39 31l65 61 7-76 21 74 56-56-29 89-84 10z" fill="#171113" stroke="#090709" stroke-width="7"/>',
+    knight: '<path d="M76 116L48 30l55 59 9-75 22 75 50-59-24 90-80 7z" fill="#12151a" stroke="#07090c" stroke-width="7"/>',
+    timebeast: '<path d="M74 118L38 40l58 50 14-76 18 76 57-50-35 90-75 8z" fill="#17121d" stroke="#09070d" stroke-width="7"/>',
+    treebeast: '<path d="M74 123L41 46l58 47 12-80 17 79 58-46-32 84-80 4z" fill="#121813" stroke="#070b08" stroke-width="7"/>'
+  };
+
   const monsterLegs = {
     gargoyle: '<path d="M83 164l-7 31 9 13 10-4 8-30m31-10 7 31-9 13-10-4-8-30" fill="@BODY@" stroke="#303c43" stroke-width="5"/><path d="M77 202l-13 10 27 4 8-9m39-5 13 10-27 4-8-9" fill="@S@" stroke="#303c43" stroke-width="4"/>',
     raven: '<path d="M99 165l-3 29m28-29 3 29" fill="none" stroke="#d5a84b" stroke-width="5" stroke-linecap="round"/><path d="M96 193l-11 10 22 1 7-8m13-3 11 10-22 1-7-8" fill="none" stroke="#d5a84b" stroke-width="4" stroke-linecap="round"/>',
@@ -552,12 +575,15 @@ function figureSvg(person, isMonster = false) {
     .replaceAll('@P@', p).replaceAll('@S@', s).replaceAll('@A@', a);
   const hero = isMonster ? null : (heroes[kind] || heroes.scribe);
   const creature = isMonster ? (monsters[kind] || monsters.golem) : null;
-  let back = isMonster ? creature.back : hero.cape;
+  let back = isMonster ? (monsterSilhouettes[kind] || monsterSilhouettes.golem) + creature.back : hero.cape;
   let legs = isMonster ? (monsterLegs[kind] || '') : '<path d="M84 163l-5 42q8 10 24 7l8-44m20-5 5 42q-9 10-25 7l-7-44" fill="#4d4652" stroke="#332f3d" stroke-width="4"/><path d="M79 201q13 4 25 0l1 18q-12 8-28 1zm53 0q-13 4-25 0l-1 18q12 8 28 1z" fill="@S@" stroke="#332f3d" stroke-width="3"/><path d="M73 217h34l-4 10H69zm34 0h34l5 10h-35z" fill="#453c42" stroke="#332f3d" stroke-width="3"/><path d="M78 207h25m31 0h-25" stroke="@A@" stroke-width="3"/>';
   let body = isMonster ? creature.body : hero.coat;
   let arms = isMonster ? '' : '<path d="M80 111q-20-3-26 18l-8 29q-4 11 7 14 10 2 14-8l11-22 17-12m46-19q20-3 26 18l8 29q4 11-7 14-10 2-14-8l-11-22-17-12" fill="url(#' + id + '-body)" stroke="#34303b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 153l-8 9 8 9 12-9m98-9 8 9-8 9-12-9" fill="#d9a783" stroke="#654b46" stroke-width="3"/><path d="M56 126l13 5m95-5-13 5" stroke="@A@" stroke-width="4"/>';
   let head = isMonster ? creature.head : '<path d="M96 84v22q14 11 28 0V84" fill="#d6a27d" stroke="#64494b" stroke-width="3"/><path d="M80 57q0-34 30-34t31 34v24q-4 28-31 31-27-4-31-31z" fill="#e6b48d" stroke="#59434a" stroke-width="4"/><path d="M82 77q-8 11 1 21m56-21q8 11-1 21" fill="#e6b48d" stroke="#59434a" stroke-width="3"/>' + hero.hair;
-  let face = isMonster ? creature.face : '<path d="M91 70q8-6 16 0m12 0q8-6 16 0" fill="none" stroke="#51404a" stroke-width="3" stroke-linecap="round"/><ellipse cx="101" cy="80" rx="5.5" ry="7" fill="#fff7e3"/><ellipse cx="126" cy="80" rx="5.5" ry="7" fill="#fff7e3"/><circle cx="102" cy="81" r="3.2" fill="' + hero.eyes + '"/><circle cx="127" cy="81" r="3.2" fill="' + hero.eyes + '"/><path d="M112 83l-3 9 6 1m-11 10q8 7 17 0" fill="none" stroke="#8b5a50" stroke-width="3" stroke-linecap="round"/><circle cx="90" cy="94" r="4" fill="#ed9186" opacity=".45"/><circle cx="140" cy="94" r="4" fill="#ed9186" opacity=".45"/>';
+  let face = isMonster ? '' : '<path d="M91 70q8-6 16 0m12 0q8-6 16 0" fill="none" stroke="#51404a" stroke-width="3" stroke-linecap="round"/><ellipse cx="101" cy="80" rx="5.5" ry="7" fill="#fff7e3"/><ellipse cx="126" cy="80" rx="5.5" ry="7" fill="#fff7e3"/><circle cx="102" cy="81" r="3.2" fill="' + hero.eyes + '"/><circle cx="127" cy="81" r="3.2" fill="' + hero.eyes + '"/><path d="M112 83l-3 9 6 1m-11 10q8 7 17 0" fill="none" stroke="#8b5a50" stroke-width="3" stroke-linecap="round"/><circle cx="90" cy="94" r="4" fill="#ed9186" opacity=".45"/><circle cx="140" cy="94" r="4" fill="#ed9186" opacity=".45"/>';
+  const menace = isMonster
+    ? '<g class="monster-menace"><path d="M88 104l17 5m10 0 17-6" fill="none" stroke="#241923" stroke-width="8" stroke-linecap="round"/><path d="M94 114l12-2m12 0 12 2" fill="none" stroke="#09080d" stroke-width="7" stroke-linecap="round"/><path d="M91 126q19-9 39 0l-3 15q-16 10-32 0z" fill="#120b12" stroke="#09070b" stroke-width="4"/><path d="M96 126l7 3 2 9-8-5zm25 0-7 3-2 9 8-5z" fill="#f5e7cd"/><path d="M107 140l3-5 3 5" fill="#e8cfaa"/></g>'
+    : '';
   let equipment = isMonster ? '' : hero.hat + hero.prop;
   let detail = isMonster ? creature.front : hero.detail;
 
@@ -585,11 +611,11 @@ function figureSvg(person, isMonster = false) {
   const markBadge = '<g class="figure-insignia"><circle cx="110" cy="157" r="10" fill="#fff0c9" stroke="#382f3e" stroke-width="3"/><text x="110" y="161" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="900" fill="#342c3a">' + mark + '</text></g>';
   const layer = (name, content) => '<g class="figure-layer figure-' + name + '">' + tint(content) + '</g>';
   return '<svg class="figure-svg ' + (isMonster ? 'figure-monster' : 'figure-hero') + (boss ? ' figure-boss' : '') + '" viewBox="0 0 220 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">' +
-    '<defs><linearGradient id="' + id + '-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + a + '"/><stop offset=".3" stop-color="' + p + '"/><stop offset="1" stop-color="' + s + '"/></linearGradient><radialGradient id="' + id + '-aura"><stop stop-color="' + a + '" stop-opacity=".28"/><stop offset="1" stop-color="' + a + '" stop-opacity="0"/></radialGradient></defs>' +
-    (boss ? '<ellipse cx="110" cy="124" rx="102" ry="111" fill="url(#' + id + '-aura)"/><circle cx="110" cy="124" r="102" fill="none" stroke="' + a + '" stroke-opacity=".34" stroke-width="2" stroke-dasharray="3 8"/>' : '') +
+    '<defs><linearGradient id="' + id + '-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + a + '"/><stop offset=".3" stop-color="' + p + '"/><stop offset="1" stop-color="' + s + '"/></linearGradient><radialGradient id="' + id + '-aura"><stop stop-color="' + aura + '" stop-opacity=".32"/><stop offset="1" stop-color="' + aura + '" stop-opacity="0"/></radialGradient></defs>' +
+    (isMonster ? '<ellipse class="monster-aura" cx="110" cy="128" rx="103" ry="112" fill="url(#' + id + '-aura)"/><path d="M36 170Q17 132 42 96m142 74q20-38-5-74M57 64Q78 31 99 42m43 1q25-15 38 13" fill="none" stroke="' + aura + '" stroke-opacity=".62" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 9"/>' + (boss ? '<circle cx="110" cy="124" r="102" fill="none" stroke="' + aura + '" stroke-opacity=".48" stroke-width="2" stroke-dasharray="3 8"/>' : '') : '') +
     '<ellipse cx="110" cy="236" rx="' + (boss ? '65' : '49') + '" ry="8" fill="#1b2024" opacity=".25"/><g class="figure-motion">' +
     layer('back', back) + layer('legs', legs) + layer('body', body) + layer('arms', arms) + layer('head', head) +
-    layer('face', face) + layer('equipment', equipment + (isMonster && !boss && !['serpent', 'storm', 'kraken', 'germ', 'slime'].includes(kind) ? markBadge : '')) +
+    layer('face', face) + layer('menace', menace) + layer('equipment', equipment + (isMonster && !boss && !['serpent', 'storm', 'kraken', 'germ', 'slime'].includes(kind) ? markBadge : '')) +
     layer('front', detail + bossDetail) + '</g></svg>';
 }
 
